@@ -14,7 +14,6 @@ def main():
     pdf_service = PDFService()
     file_utils = FileUtils()
 
-    
     # Get inputs
     folder_path = os.path.join(os.getcwd(), 'PDF_files')
     api_key = os.getenv("API_KEY")
@@ -22,7 +21,7 @@ def main():
     
     try:
         # Get and process files
-        files = file_utils.get_supported_files(folder_path)[:settings.NUM_CATEGORIES]
+        files = file_utils.get_supported_files(folder_path)
         documents = [pdf_service.extract_text(f) for f in files]
         valid_docs = [doc for doc in documents if doc]
         
