@@ -26,7 +26,7 @@ class PDFService:
                         break
                     text += page_text
             
-            logger.info(f"Extracted {len(text)} chars from {os.path.basename(filepath)}")
+            #logger.info(f"Extracted {len(text)} chars from {os.path.basename(filepath)}")
             return Document(
                 filename=os.path.basename(filepath),
                 content=text,

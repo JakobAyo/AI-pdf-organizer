@@ -7,7 +7,6 @@ from utils.logging_utils import logger
 class AIService:
     def __init__(self, api_key: str):
         genai.configure(api_key=api_key)
-        print(genai.list_models())
         self.model = genai.GenerativeModel('gemini-2.0-flash')
 
     def suggest_categories(self, documents: List[Document]) -> List[CategorySuggestion]:

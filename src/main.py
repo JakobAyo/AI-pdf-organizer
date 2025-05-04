@@ -31,10 +31,6 @@ def main():
         # Output results
         print("\n=== Suggested Categories ===")
         print(suggestions)
-        for i, suggestion in enumerate(suggestions, 1):
-            print(f"{i}. {suggestion.name}")
-            print(f"   - {suggestion.description}")
-            print(f"   - Includes documents: {', '.join(map(str, suggestion.document_ids))}\n")
             
     except Exception as e:
         print(f"Error: {str(e)}")
