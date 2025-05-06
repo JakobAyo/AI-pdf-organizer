@@ -3,6 +3,7 @@ from models.schemas import CategorySuggestion, Document
 from config.settings import settings
 from typing import List
 from utils.logging_utils import logger
+import re
 
 class AIService:
     def __init__(self, api_key: str):
@@ -32,12 +33,19 @@ class AIService:
         
         try:
             response = self.model.generate_content(prompt)
-            # return self._parse_response(response.text)
-            return response.text
+            return self._parse_response(response.text)
         except Exception as e:
             logger.error(f"AI API Error: {e}")
             return []
 
     def _parse_response(self, text: str) -> List[CategorySuggestion]:
         # Implementation of response parsing
-        pass
+        self.categories = re.findall(r'^\d.*', text, re.MULTILINE)
+
+        for i, category in enumerate(self.categories):
+            category = category.replace("*", " ")
+            category = category.split(".")
+            category = category[1].strip()
+            self.categories[i] = category
+        
+        return self.categories
