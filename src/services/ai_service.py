@@ -16,20 +16,32 @@ class AIService:
             for i, doc in enumerate(documents)
         )
         
-        prompt = f"""Analyze these {len(documents)} documents and suggest exactly {settings.NUM_CATEGORIES} logical categories.
-        For each category provide:
-        - A clear name
-        - Description
-        - Which documents belong there (by number 1-{len(documents)})
+        prompt = f"""
+        Analyze the following {len(documents)} documents and categorize them into exactly {settings.NUM_CATEGORIES} distinct, logical categories.
+
+        Requirements:
+
+        Categories must be mutually exclusive (no document should fit into multiple categories).
+
+        Categories should be clearly named based on common themes, topics, or patterns.
+
+        Every document must be assigned to one category.
+
+        Output Format:
+        Strictly adhere to this structure for each category:
+
+        1. [Category Name]  
+        - Documents: [comma-separated list of document numbers (1-{len(documents)})]  
         
-        Documents:
+        Documents to Analyze:
         {combined_text}
-        
-        Respond in this exact format:
-        1. [Category Name]
-        - Description: [description]
-        - Documents: [comma-separated numbers]
-        ..."""
+
+        Additional Notes:
+
+        Prioritize clarity and relevance in category names (e.g., "Healthcare Policy" over "General Topics").
+
+        Do not introduce subcategories or additional sections beyond the specified format.
+        """
         
         try:
             response = self.model.generate_content(prompt)
