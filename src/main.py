@@ -4,6 +4,7 @@ from utils.file_utils import FileUtils
 from config.settings import settings
 from dotenv import load_dotenv
 import os
+from utils import print_utils, inquiry
 
 load_dotenv()
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -29,8 +30,9 @@ def main():
         suggestions = ai_service.suggest_categories(valid_docs)
         
         # Output results
-        print("\n=== Suggested Categories ===")
-        print(suggestions)
+        print_utils.start()
+        print_utils.categories(suggestions)
+        inquiry.unwanted_categories(suggestions)
             
     except Exception as e:
         print(f"Error: {str(e)}")
