@@ -20,22 +20,19 @@ def main():
     api_key = os.getenv("API_KEY")
     ai_service = AIService(api_key)
     
-    try:
-        # Get and process files
-        files = file_utils.get_supported_files(folder_path)
-        documents = [pdf_service.extract_text(f) for f in files]
-        valid_docs = [doc for doc in documents if doc]
-        
-        # Get suggestions
-        suggestions = ai_service.suggest_categories(valid_docs)
-        
-        # Output results
-        print_utils.start()
-        print_utils.categories(suggestions)
-        inquiry.unwanted_categories(suggestions)
-            
-    except Exception as e:
-        print(f"Error: {str(e)}")
+    # Get and process files
+    files = file_utils.get_supported_files(folder_path)
+    documents = [pdf_service.extract_text(f) for f in files]
+    valid_docs = [doc for doc in documents if doc]
+    
+    # Get suggestions
+    suggestions = ai_service.suggest_categories(valid_docs)
+
+    # Output results
+    print_utils.start()
+    print_utils.categories(suggestions)
+    selected_categories = inquiry.unwanted_categories(suggestions)
+
 
 if __name__ == "__main__":
     main()
