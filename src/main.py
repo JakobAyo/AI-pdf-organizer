@@ -33,6 +33,12 @@ def main():
     print_utils.categories(suggestions)
     selected_categories = inquiry.unwanted_categories(suggestions)
 
+    while selected_categories:
+        suggestions = ai_service.resuggest_categories(selected_categories)       
+        print_utils.categories(suggestions)
+        selected_categories = inquiry.unwanted_categories(suggestions)
+    print_utils.end()
+
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,3 @@
-import inquirer
-
 RED = '\x1b[0;31;40m'
 GREEN = '\x1b[0;32;40m'
 YELLOW = '\x1b[0;33;40m'
@@ -14,3 +12,10 @@ def categories(categories):
 def start():
     size = 30
     print(WHITE + '>'*size + f"{'Suggested Categories':^25}" + '<'*size + ENDC + "\n")
+
+
+def end():
+    size = 30
+    print(WHITE + '>'*size + f"{'Done!':^25}" + '<'*size + ENDC + "\n")
+
+    

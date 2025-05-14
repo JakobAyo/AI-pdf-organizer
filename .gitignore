@@ -1,4 +1,5 @@
 .env
+PDF_files/*
 *.pyc
 *.pdf
 *.log
