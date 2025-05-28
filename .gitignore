@@ -1,6 +1,6 @@
 .env
 PDF_files/*
+__pycache__
 *.pyc
 *.pdf
-*.log
 tempCodeRunnerFile.py
