@@ -1,0 +1,28 @@
+Objective: Analyze the {invoice_count} invoices to identify recurring patterns, keys and values which are important to create database of invoices
+
+Task:
+Scan all invoices to identify:
+- Key values: (e.g Invoice Number, Bill to, Ship to, Balance, Date, Quantity, Rate...)
+- make good reasoning of the data in case the Structure of the invoice text is not properly formatted
+
+Output Format:
+
+- in json format
+- only give the raw data of the response. skip the explaination.
+- number of outputs {invoice_count}
+
+[Invoice #Invoice-number [
+    Bill-to:
+    Ship-to:
+    Balance:
+    Date:
+    Item:
+    quantity:
+    Rate:
+    ...
+    ...
+    ...
+]
+]
+Invoices to Analyze:
+{combined_text}
