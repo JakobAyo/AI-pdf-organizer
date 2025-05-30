@@ -11,7 +11,7 @@ def categories(categories):
 
 def start():
     size = 30
-    print(WHITE + '>'*size + f"{'Suggested Categories':^25}" + '<'*size + ENDC + "\n")
+    print(WHITE + '>'*size + f"{'Processing':^25}" + '<'*size + ENDC + "\n")
 
 
 def end():

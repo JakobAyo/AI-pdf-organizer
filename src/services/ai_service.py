@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from models.schemas import CategorySuggestion, Document
+from models.schemas import CategorySuggestion
 from typing import List, Dict
 from utils.logging_utils import logger
 import re
@@ -10,9 +10,6 @@ class AIService:
     def __init__(self, api_key: str):
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel("gemini-2.0-flash")
-
-    def suggest_categoreis(self, documents: List[Document]):
-        pass
 
     def extract_invoice(self, invoice_text: List[Dict[str, str]]) -> List[Dict]:
         combined_text = "\n\n--- INVOICE BREAK ---\n\n".join(
@@ -28,11 +25,7 @@ class AIService:
 
         try:
             response = self.model.generate_content(prompt)
-            logger.info(response.text)
-            print(response.text)
             return self._parse_response(response.text)
-
-            # return self._parse_response(response.text)
         except Exception as e:
             logger.error(f"AI API Error: {e}")
             return []

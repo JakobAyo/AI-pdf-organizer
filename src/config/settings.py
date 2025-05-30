@@ -1,4 +1,3 @@
-# config/settings.py
 class _Settings:
     def __init__(self):
         self.SUPPORTED_FILE_TYPES = ['.pdf']

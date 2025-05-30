@@ -3,7 +3,10 @@ import pytest
 from pathlib import Path
 from src.services.ai_service import AIService
 from src.config.settings import settings
-import re
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 @pytest.fixture
 def input_text():
@@ -19,18 +22,9 @@ def output_text():
 
 @pytest.fixture
 def ai_service():
-    return AIService(settings.API_KEY)
-
-# def test_cleaning(input_text, output_text):
-#     cleaned = input_text.strip()
-#
-#     cleaned = re.sub("```json\n", "", cleaned)
-#     cleaned = re.sub("```", "", cleaned)
-#
-#     assert(cleaned == output_text)
+    return AIService(os.getenv("API_KEY"))
 
 def test_parse_returns_list(ai_service, input_text, output_text):
     result = ai_service._parse_response(input_text)
     print(result)
     assert(result != [])
-    # assert(result == output_text)
