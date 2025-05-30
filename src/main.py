@@ -4,10 +4,9 @@ from utils.file_utils import FileUtils
 from config.settings import settings
 from dotenv import load_dotenv
 import os
-from utils import print_utils, inquiry
+from utils import print_utils
 from helper import chunk_list, save_json
 from utils.logging_utils import logger
-import json
 
 load_dotenv()
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -39,6 +38,8 @@ def main():
     document_batches = chunk_list(documents, settings.BATCH_SIZE)
 
     all_invoices = []
+
+    print_utils.start()
     for i, batch in enumerate(document_batches):
         print(f"Processing batch {i+1}/{len(document_batches)} ({len(batch)} invoices)")
 
@@ -48,10 +49,11 @@ def main():
         for idx, invoice in enumerate(invoices):
             invoice["filename"] = batch[idx]["filename"]
 
-        logger.info(f"{i+1}/{len(document_batches)} ({len(batch)} invoices)\n {invoices}")
+        logger.info(f"{i+1}/{len(document_batches)} ({len(batch)} invoices)")
         all_invoices.extend(invoices)
 
     print("Total processed invoices:", len(all_invoices))
+    print_utils.end()
 
     # Save to json
     save_json(project_root, all_invoices)
