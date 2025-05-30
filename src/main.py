@@ -12,20 +12,17 @@ import json
 load_dotenv()
 script_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(script_dir)
+api_key = os.getenv("API_KEY")
 
 
 def main():
     # Initialize components
     pdf_service = PDFService()
     file_utils = FileUtils()
-    ai_service = AIService(settings.API_KEY)
+    ai_service = AIService(api_key)
 
     # Get inputs
     folder_path = os.path.join(project_root, "PDF_files")
-    api_key = os.getenv("API_KEY")
-    ai_service = AIService(api_key)
-
-    # Get and process files
     files = file_utils.get_supported_files(folder_path)
 
     # Extract text from all PDFs
