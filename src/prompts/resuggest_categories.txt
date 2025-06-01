@@ -1,0 +1,29 @@
+You are helping refine the categorization of invoice items. The user has reviewed the initial category assignments but wants to replace the following categories: {selected_categories}.
+
+Input Data:
+Items: {all_items}
+
+Current Categories: {current_categories}
+
+Output Format:
+
+[
+    "Category 1": [ID, ID, ...],
+    "Category 2": [ID, ID, ...],
+    ...
+]
+
+Guidelines:
+
+    Replace the categories {selected_categories} with {number_of_selected_categories} new logical categories that better group their current items.
+
+    Reassign all items to the final list of categories.
+
+    Skip/ignore None values or invalid entries (e.g., 88: [None]).
+
+IMPORTANT: 
+- Only return the The categories and the assigned IDs. (No Explaination needed)
+- Make sure all categories have IDs assigned to them
+- Keep the other Category names exactly as they are.
+
+Now, suggest the {number_of_selected_categories} new categories and reassign the items accordingly.

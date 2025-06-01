@@ -1,4 +1,4 @@
-You are analyzing an invoice dataset containing various items. Based on the following list of items, suggest {number_of_categories} distinct categories that logically group these items. Each item should belong to only one category. Return the results as a dictionary where the keys are the category names (e.g., 'Furniture', 'Office Supplies') and the values are lists of item IDs assigned to that category.
+You are analyzing an invoice dataset containing various items. Based on the following list of items, suggest {number_of_categories} distinct categories that logically group these items. Each item should belong to only one category. Return the results as a dictionary where the keys are the category names and the values are lists of item IDs assigned to that category.
 
 Here is the invoice data:
 {all_items}
@@ -29,9 +29,9 @@ Example Output (for illustration):
     "Appliances & Equipment": [21, 28, 35, 42, 55]
 ]
 
-Now, generate the categorized dictionary for the provided invoice data.
-
 IMPORTANT: 
 - Only return the The categories and the assigned IDs. (No Explaination needed)
 - return exactly {number_of_categories} Categories
 - Make sure all categories have IDs assigned to them
+
+Now, generate the categorized dictionary for the provided invoice data.
