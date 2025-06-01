@@ -4,7 +4,7 @@ from utils.file_utils import FileUtils
 from config.settings import settings
 from dotenv import load_dotenv
 import os
-from utils import print_utils
+from utils import print_utils, inquiry
 from helper import chunk_list, save_json
 from utils.logging_utils import logger
 
@@ -57,6 +57,16 @@ def main():
 
     # Save to json
     save_json(project_root, all_invoices)
+
+    # Categories
+    categories = ai_service.categorize_invoice(settings.NUM_CATEGORIES)
+
+    print(categories)
+    user_input = input("Enter for resuggestions: ")
+    selection = [item.strip() for item in user_input.split(',')]
+    
+    new_categories = ai_service.resuggest_categories(selection)
+    print(new_categories)
 
 if __name__ == "__main__":
     main()

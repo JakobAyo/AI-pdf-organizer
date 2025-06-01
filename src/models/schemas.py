@@ -8,5 +8,4 @@ class Document(BaseModel):
 
 class CategorySuggestion(BaseModel):
     name: str
-    description: str
-    document_ids: List[int]
+    invoice_ids: List[int]
