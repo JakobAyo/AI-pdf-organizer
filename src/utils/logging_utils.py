@@ -47,7 +47,7 @@ def setup_logging():
 
     # Create file handler
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    log_file = log_dir / f"pdf_organizer_{timestamp}.log"
+    log_file = log_dir / f"{timestamp}.log"
     file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(logging.INFO)
     file_handler.setFormatter(
