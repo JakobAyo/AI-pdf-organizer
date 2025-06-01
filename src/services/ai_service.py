@@ -45,7 +45,7 @@ class AIService:
                 # print(f"{index:<10}{invoice["Item"]}")
                 all_items.update({index: invoice["Item"]})
             except KeyError as e:
-                print(f"{print_utils.RED}KeyError{print_utils.ENDC} at {index}: {e}")
+                logger.error(f"{print_utils.RED}KeyError{print_utils.ENDC} at {index}: {e}")
 
         prompt_template = load_prompt("categorize.txt")
         prompt = prompt_template.format(
