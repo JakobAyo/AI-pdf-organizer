@@ -9,3 +9,8 @@ def save_json(root_dir, invoices):
     output_path = f"{root_dir}/invoices.json"
     with open(output_path, "w") as f:
         json.dump(invoices, f)
+
+def load_json(root_dir):
+    path = f"{root_dir}/invoices.json"
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
