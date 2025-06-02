@@ -4,4 +4,4 @@ from pathlib import Path
 from src.helper import load_json
 
 def test_create_dir():
-    InvoiceOrganizer.organize_pdfs()
+    InvoiceOrganizer.create_folders()
