@@ -11,7 +11,7 @@ class InvoiceOrganizer:
     OUTPUT_FOLDER = "categorized_invoices"
 
     @staticmethod
-    def organize_pdfs():
+    def create_folders():
         os.makedirs(InvoiceOrganizer.OUTPUT_FOLDER, exist_ok=True)
 
         for category in categories:
