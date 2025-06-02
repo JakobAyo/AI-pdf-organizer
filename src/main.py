@@ -56,17 +56,19 @@ def main():
     print_utils.end()
 
     # Save to json
-    save_json(project_root, all_invoices)
+    save_json(project_root, all_invoices, "invoices")
 
     # Categories
     categories = ai_service.categorize_invoice(settings.NUM_CATEGORIES)
+    save_json(project_root, categories, "categories")
 
-    print(categories)
-    user_input = input("Enter for resuggestions: ")
-    selection = [item.strip() for item in user_input.split(',')]
-    
-    new_categories = ai_service.resuggest_categories(selection)
-    print(new_categories)
+    # print(categories)
+    # user_input = input("Enter for resuggestions: ")
+    # selection = [item.strip() for item in user_input.split(',')]
+    #
+    # new_categories = ai_service.resuggest_categories(selection)
+    # save_json(project_root, categories, "categories")
+    # print(new_categories)
 
 if __name__ == "__main__":
     main()

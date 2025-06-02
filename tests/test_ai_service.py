@@ -10,19 +10,19 @@ load_dotenv()
 
 @pytest.fixture
 def invoices_in():
-    file_path = Path("tests") / "invoices_in.txt"
+    file_path = Path("tests") / "data" / "invoices_in.txt"
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
 @pytest.fixture
 def categories_in():
-    file_path = Path("tests") / "categories_in.txt"
+    file_path = Path("tests") / "data" / "categories_in.txt"
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
 @pytest.fixture
 def recategorize_in():
-    file_path = Path("tests") / "recategorize_in.txt"
+    file_path = Path("tests") /  "data" / "recategorize_in.txt"
     with open(file_path, "r", encoding="utf-8") as f:
         return f.read()
 
