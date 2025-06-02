@@ -9,6 +9,8 @@ from helper import load_json
 import json
 import os
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
 
 class AIService:
     def __init__(self, api_key: str):
@@ -35,9 +37,7 @@ class AIService:
             return []
 
     def categorize_invoice(self, number_of_categories):
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        project_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
-        invoices = load_json(project_root)
+        invoices = load_json(project_root, "invoices")
         self.all_items = {}
 
         for index, invoice in enumerate(invoices):
