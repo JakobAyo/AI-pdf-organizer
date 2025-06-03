@@ -46,7 +46,7 @@ def extract_invoices(document_batches, log_frame):
 
     log_frame.write(print_utils.start())
     for i, batch in enumerate(document_batches):
-        log_frame.write(f"Processing batch {i+1}/{len(document_batches)} ({len(batch)} invoices)")
+        log_frame.write(f"Processing batch {i+1}/{len(document_batches)} ({len(batch)} invoices)\n")
 
         batch_texts = [doc["text"] for doc in batch]
         invoices = ai_service.extract_invoice(batch_texts)
@@ -57,8 +57,8 @@ def extract_invoices(document_batches, log_frame):
         logger.info(f"{i+1}/{len(document_batches)} ({len(batch)} invoices)")
         all_invoices.extend(invoices)
 
-    log_frame.write(f"Total processed invoices: {len(all_invoices)}")
-    print_utils.end()
+    log_frame.write(f"Total processed invoices: {len(all_invoices)}\n")
+    log_frame.write(print_utils.end())
 
     # Save to json
     save_json(project_root, all_invoices, "invoices")
