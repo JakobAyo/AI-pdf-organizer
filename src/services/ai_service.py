@@ -97,7 +97,7 @@ class AIService:
 
 
 def load_prompt(prompt):
-    prompt_path = Path("prompts") / f"{prompt}"
+    prompt_path = os.path.join(project_root, "src", "prompts", prompt)
     try:
         with open(prompt_path, "r", encoding="utf-8") as f:
             return f.read()
