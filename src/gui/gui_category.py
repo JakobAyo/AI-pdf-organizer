@@ -1,4 +1,5 @@
 import os
+from sys import implementation
 from dotenv import load_dotenv
 from gui.widgets import LogPanel, StandardButton, StandardLabel, StandardFrame
 from customtkinter import *
@@ -7,6 +8,7 @@ from services.ai_service import AIService
 from services.pdf_service import PDFService
 from utils.file_utils import FileUtils
 import main
+import threading
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -54,6 +56,7 @@ class CategoryGUI(CTk):
         files = main.get_files()
         documents = main.extract_text(files)
         document_batches = main.split_batches(documents)
-        main.extract_invoices(document_batches, self.frame_log)
+        thread = threading.Thread(target=main.extract_invoices, args=(document_batches, self.frame_log))
+        thread.start()
 
 
