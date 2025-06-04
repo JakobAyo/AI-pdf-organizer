@@ -1,4 +1,4 @@
-import customtkinter as ctk
+from customtkinter import *
 import json
 from pathlib import Path
 import os
@@ -9,7 +9,7 @@ from helper import load_json
 project_root = Path(__file__).parent.parent.parent
 PDF_DIR = Path(project_root) / "categorized_invoices"
 
-class InvoiceApp(ctk.CTk):
+class InvoiceApp(CTk):
     def __init__(self):
         super().__init__()
 
@@ -19,23 +19,23 @@ class InvoiceApp(ctk.CTk):
         self.result_index_map = []
 
         # Set default appearance
-        ctk.set_appearance_mode("dark")
-        ctk.set_default_color_theme("blue")
+        set_appearance_mode("dark")
+        set_default_color_theme("blue")
 
         self.create_widgets()
 
     def create_widgets(self):
         # Search input
-        self.search_var = ctk.StringVar()
-        self.search_entry = ctk.CTkEntry(self, textvariable=self.search_var, placeholder_text="Search Invoices...")
+        self.search_var = StringVar()
+        self.search_entry = CTkEntry(self, textvariable=self.search_var, placeholder_text="Search Invoices...")
         self.search_entry.pack(padx=20, pady=20, fill="x")
 
         # Results frame
-        self.results_frame = ctk.CTkScrollableFrame(self)
+        self.results_frame = CTkScrollableFrame(self)
         self.results_frame.pack(padx=20, pady=10, fill="both", expand=True)
 
         # Label to show status
-        self.status_label = ctk.CTkLabel(self, text="Enter search term above", anchor="w")
+        self.status_label = CTkLabel(self, text="Enter search term above", anchor="w")
         self.status_label.pack(padx=20, pady=(0, 10), anchor="w")
 
         # Update results on key release
@@ -53,13 +53,13 @@ class InvoiceApp(ctk.CTk):
         self.status_label.configure(text=f"Found {len(matches)} matching invoice(s)")
 
         if not matches:
-            label = ctk.CTkLabel(self.results_frame, text="No matches found.", fg_color="transparent")
+            label = CTkLabel(self.results_frame, text="No matches found.", fg_color="transparent")
             label.pack(anchor="w", pady=2)
             return
 
         for idx, invoice in enumerate(matches[:50]):  # limit to 50 results
             display_text = f"{invoice['Invoice Number']} - {invoice['Item']}"
-            result_btn = ctk.CTkButton(
+            result_btn = CTkButton(
                 self.results_frame,
                 text=display_text,
                 anchor="w",

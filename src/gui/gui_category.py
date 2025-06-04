@@ -120,5 +120,7 @@ class CategoryGUI(CTk):
     def organize_invoices(self):
         InvoiceOrganizer.create_folders()
         InvoiceOrganizer.move_to_folders()
+        self.destroy()
+        InvoiceApp().mainloop()
 
 
