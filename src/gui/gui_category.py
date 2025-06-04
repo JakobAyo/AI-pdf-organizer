@@ -12,6 +12,8 @@ from utils.file_utils import FileUtils
 import main
 import threading
 
+from utils.organizer_util import InvoiceOrganizer
+
 load_dotenv()
 
 script_dir = os.path.dirname(__file__)
@@ -48,6 +50,7 @@ class CategoryGUI(CTk):
         self.continue_button = StandardButton(self.frame_log, text="Continue", command=self.show_categories)
 
         self.category_frame = StandardFrame(self)
+        self.organize_button = StandardButton(self.category_frame, text="Organize Invoices", command=self.organize_invoices)
 
     def ask_folder(self):
         folder_name = filedialog.askdirectory()
@@ -96,6 +99,7 @@ class CategoryGUI(CTk):
             category_button.pack(pady=2, expand=False)
             self.category_buttons[category] = category_button
 
+        self.organize_button.pack(side=BOTTOM, pady=5)
         label = StandardLabel(self.category_frame, text="Select categories for resuggestion")
         label.pack(side=BOTTOM, pady=10)
             
@@ -112,5 +116,9 @@ class CategoryGUI(CTk):
             self.resuggest_categories_button.configure(state="normal")
         else:
             self.resuggest_categories_button.configure(state="disabled")
+            
+    def organize_invoices(self):
+        InvoiceOrganizer.create_folders()
+        InvoiceOrganizer.move_to_folders()
 
 
