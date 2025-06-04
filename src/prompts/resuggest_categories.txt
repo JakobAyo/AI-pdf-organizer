@@ -23,7 +23,8 @@ Guidelines:
 
 IMPORTANT: 
 - Only return the The categories and the assigned IDs. (No Explaination needed)
-- Make sure all categories have IDs assigned to them
-- Keep the other Category names exactly as they are.
+- Make sure all categories have IDs assigned to them.
+- Don't change the other categories only reassign the IDs.
+- return exactly {number_of_all_categories} categories.
 
 Now, suggest the {number_of_selected_categories} new categories and reassign the items accordingly.

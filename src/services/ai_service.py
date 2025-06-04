@@ -68,6 +68,7 @@ class AIService:
             selected_categories=selected_categories,
             number_of_selected_categories=len(selected_categories),
             current_categories=[category for category in self.categories],
+            number_of_all_categories=len(self.categories)
         )
 
         try:
