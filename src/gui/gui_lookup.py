@@ -3,11 +3,11 @@ import json
 from pathlib import Path
 import os
 import subprocess
-from helper import load_json
+from helper import load_json, load_config
 
 # Load parsed invoice data
 project_root = Path(__file__).parent.parent.parent
-PDF_DIR = Path(project_root) / "categorized_invoices"
+PDF_DIR = load_config()["folder_path"]
 
 class InvoiceApp(CTk):
     def __init__(self):
@@ -84,7 +84,7 @@ class InvoiceApp(CTk):
         return results
 
     def open_pdf(self, invoice):
-        pdf_path = PDF_DIR / f"{invoice['filename']}"
+        pdf_path = Path(invoice['filename'])
 
         if not pdf_path.exists():
             print(f"File not found: {pdf_path}")
