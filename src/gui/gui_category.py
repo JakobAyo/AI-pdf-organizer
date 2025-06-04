@@ -3,8 +3,9 @@ from sys import implementation
 from time import sleep
 from dotenv import load_dotenv
 from gui.widgets import LogPanel, StandardButton, StandardLabel, StandardFrame
+from gui.gui_lookup import InvoiceApp
 from customtkinter import *
-from helper import load_config, save_config
+from helper import load_config, save_config, load_json
 from services.ai_service import AIService
 from services.pdf_service import PDFService
 from utils.file_utils import FileUtils
@@ -13,6 +14,9 @@ import threading
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
+
+script_dir = os.path.dirname(__file__)
+project_root = os.path.join(script_dir, "..", "..")
 
 pdf_service = PDFService()
 file_utils = FileUtils()
@@ -46,7 +50,10 @@ class CategoryGUI(CTk):
         self.select_button = StandardButton(self.frame_bottom, text="Select Invoices Folder", command=self.ask_folder)
         self.select_button.pack(side=RIGHT, padx=5)
 
-        self.categories_button = StandardButton(self.frame_log, text="Show Categories")
+        self.categories_button = StandardButton(self.frame_log, text="Show Categories", command=self.show_categories)
+        self.categories_button.pack(pady=10)
+
+        self.scrollable_frame = CTkScrollableFrame(self)
 
     def ask_folder(self):
         folder_name = filedialog.askdirectory()
@@ -67,3 +74,38 @@ class CategoryGUI(CTk):
 
     def show_categories_button(self):
         self.categories_button.pack(pady=10)
+
+    def show_categories(self):
+        self.frame_log.clear()
+        self.frame_log.forget()
+        self.scrollable_frame.pack(fill=BOTH, padx=10, pady=5, expand=True)
+        categories = load_json(project_root, "categories")
+
+        self.selected_categories = []
+        self.category_buttons = {}
+
+        for category, idx in categories.items():
+            display_text = category
+            category_button = StandardButton(
+                self.scrollable_frame,
+                text=display_text,
+                command=lambda c=category: self.category_clicked(c)
+            )
+            category_button.pack(pady=2, expand=False)
+            print(category_button.cget("fg_color"))
+            self.category_buttons[category] = category_button
+
+        label = StandardLabel(self.scrollable_frame, text="Select categories for resuggestion")
+        label.pack(side=BOTTOM, pady=10)
+            
+    def category_clicked(self, category):
+        button = self.category_buttons[category]
+        if category in self.selected_categories:
+            self.selected_categories.remove(category)
+            button.configure(fg_color="#1F6AA5")
+        else:
+            self.selected_categories.append(category)
+            button.configure(fg_color="red")
+
+
+
