@@ -25,6 +25,9 @@ class LogPanel(StandardFrame):
         super().__init__(*args, **kwargs)
 
         self.log_textbox = CTkTextbox(self, wrap="none", state="disabled")
+        self.log_textbox.configure(
+            font=("Arial", 19)
+        )
         self.log_textbox.pack(padx=10, pady=10, fill=BOTH, expand=True)
 
     def write(self, message):
