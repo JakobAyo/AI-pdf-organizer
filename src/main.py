@@ -63,6 +63,8 @@ def extract_invoices(document_batches, log_frame, callback=None):
     # Save to json
     save_json(project_root, all_invoices, "invoices")
 
+    suggest_categories()
+
     if callback:
         callback()
         
@@ -70,6 +72,12 @@ def extract_invoices(document_batches, log_frame, callback=None):
 
 def suggest_categories():
     categories = ai_service.categorize_invoice(settings.NUM_CATEGORIES)
+    save_json(project_root, categories, "categories")
+
+    return categories
+
+def resuggest_categories(selected_categories):
+    categories = ai_service.resuggest_categories(selected_categories)
     save_json(project_root, categories, "categories")
 
     return categories
