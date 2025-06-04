@@ -117,11 +117,12 @@ class InvoiceApp(CTk):
                 low, high = self.parse_amount_range(selected_amount)
                 self.filtered_invoices = [
                     inv for inv in self.filtered_invoices
-                    if inv.get("Total", "").replace("$", "").replace(",", "").strip()
-                    and low <= float(inv["Total"].replace("$", "").replace(",", "")) <= high
+                    if inv.get("Total") and
+                    float(inv["Total"].replace("$", "").replace(",", "")) >= low and
+                    float(inv["Total"].replace("$", "").replace(",", "")) <= high
                 ]
-            except:
-                pass  # Invalid amount format
+            except Exception as e:
+                print("Amount filter error:", e)
 
         # Apply search query
         results = []
@@ -139,11 +140,22 @@ class InvoiceApp(CTk):
         self.display_results(results)
 
     def parse_amount_range(self, amount_str):
-        """Convert filter string like '$0 - $100' into (low, high)"""
+        """Convert strings like '$0 - $100' or '$1000+' into min/max values"""
+        amount_str = amount_str.strip()
+
         if "Any Amount" in amount_str:
             return (0, float('inf'))
-        low, high = amount_str.replace("$", "").split(" - ")
-        return float(low), float(high)
+
+        elif " - " in amount_str:
+            low, high = amount_str.replace("$", "").split(" - ")
+            return float(low), float(high)
+
+        elif "+" in amount_str:
+            low = amount_str.replace("$", "").replace("+", "")
+            return float(low), float('inf')
+
+        else:
+            return 0, float('inf')
 
     def display_results(self, matches):
         if not matches:
@@ -154,7 +166,7 @@ class InvoiceApp(CTk):
 
         self.status_label.configure(text=f"Found {len(matches)} matching invoice(s)")
 
-        for idx, invoice in enumerate(matches[:50]):  # limit to 50
+        for idx, invoice in enumerate(matches):
             display_text = f"{invoice['Invoice Number']} - {invoice['Bill To']} - {invoice['Item']} - {invoice['Total']}"
             result_btn = CTkButton(
                 self.results_frame,
