@@ -1,8 +1,8 @@
-from helper import load_json
+from helper import load_json, load_config
 from pathlib import Path
 
 project_root = Path(__file__).parent.parent.parent
-INVOICE_JSON = load_json(project_root, "invoices")
+INVOICE_JSON = load_json(load_config()["folder_path"], "invoices")
 
 def search_invoices(query):
     query = query.lower()
