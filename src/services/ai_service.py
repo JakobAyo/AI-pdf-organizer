@@ -5,7 +5,7 @@ from utils import print_utils
 from utils.logging_utils import logger
 import re
 from pathlib import Path
-from helper import load_json
+from helper import load_json, load_config
 import json
 import os
 
@@ -37,7 +37,7 @@ class AIService:
             return []
 
     def categorize_invoice(self, number_of_categories):
-        invoices = load_json(project_root, "invoices")
+        invoices = load_json(load_config()["folder_path"], "invoices")
         self.all_items = {}
 
         for index, invoice in enumerate(invoices):

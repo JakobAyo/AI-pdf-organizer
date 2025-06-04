@@ -20,7 +20,7 @@ class InvoiceOrganizer:
 
     @staticmethod
     def move_to_folders():
-        InvoiceOrganizer.invoices = load_json(project_root, "invoices")
+        InvoiceOrganizer.invoices = load_json(InvoiceOrganizer.PDF_FOLDER, "invoices")
         for category, ids in InvoiceOrganizer.categories.items():
             category_folder = os.path.join(InvoiceOrganizer.PDF_FOLDER, category)
             for id in ids:
@@ -29,11 +29,11 @@ class InvoiceOrganizer:
 
     @staticmethod
     def update_folder_path(id, category):
-        invoices = load_json(project_root, "invoices")
+        invoices = load_json(InvoiceOrganizer.PDF_FOLDER, "invoices")
         file_name = invoices[int(id)]["filename"].split("/")[-1]
         invoices[int(id)]["filename"] = os.path.join(InvoiceOrganizer.PDF_FOLDER, category, file_name)
         invoices[int(id)]["category"] = category
-        save_json(project_root, invoices, "invoices")
+        save_json(InvoiceOrganizer.PDF_FOLDER, invoices, "invoices")
 
 
 

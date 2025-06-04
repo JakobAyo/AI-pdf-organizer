@@ -50,7 +50,6 @@ class CategoryGUI(CTk):
         self.continue_button = StandardButton(self.frame_log, text="Continue", command=self.show_categories)
 
         self.category_frame = StandardFrame(self)
-        self.organize_button = StandardButton(self.category_frame, text="Organize Invoices", command=self.organize_invoices)
 
     def ask_folder(self):
         folder_name = filedialog.askdirectory()
@@ -81,8 +80,11 @@ class CategoryGUI(CTk):
         self.continue_button.pack(pady=10)
 
     def show_categories(self):
-        self.frame_log.clear()
-        self.frame_log.forget()
+        try:
+            self.frame_log.clear()
+            self.frame_log.forget()
+        except:
+            pass
         self.category_frame.pack(fill=BOTH, padx=10, pady=5, expand=True)
         categories = load_json(project_root, "categories")
 
@@ -99,9 +101,10 @@ class CategoryGUI(CTk):
             category_button.pack(pady=2, expand=False)
             self.category_buttons[category] = category_button
 
+        self.organize_button = StandardButton(self.category_frame, text="Organize Invoices", command=self.organize_invoices)
         self.organize_button.pack(side=BOTTOM, pady=5)
-        label = StandardLabel(self.category_frame, text="Select categories for resuggestion")
-        label.pack(side=BOTTOM, pady=10)
+        self.resuggest_label = StandardLabel(self.category_frame, text="Select categories for resuggestion")
+        self.resuggest_label.pack(side=BOTTOM, pady=10)
             
     def category_clicked(self, category):
         button = self.category_buttons[category]

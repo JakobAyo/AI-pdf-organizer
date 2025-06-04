@@ -61,7 +61,7 @@ def extract_invoices(document_batches, log_frame, callback=None):
     log_frame.write(print_utils.end())
 
     # Save to json
-    save_json(project_root, all_invoices, "invoices")
+    save_json(load_config()["folder_path"], all_invoices, "invoices")
 
     suggest_categories()
 

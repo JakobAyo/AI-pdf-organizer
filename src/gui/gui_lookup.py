@@ -16,7 +16,7 @@ class InvoiceApp(CTk):
         self.title("AI Invoice Organizer")
         self.geometry("1000x700")
 
-        self.invoices = load_json(project_root, "invoices")
+        self.invoices = load_json(PDF_DIR, "invoices")
         self.filtered_invoices = self.invoices  # Will be updated on filter
         self.result_index_map = []
 
