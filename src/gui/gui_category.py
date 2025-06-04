@@ -13,14 +13,9 @@ import main
 import threading
 
 load_dotenv()
-api_key = os.getenv("API_KEY")
 
 script_dir = os.path.dirname(__file__)
 project_root = os.path.join(script_dir, "..", "..")
-
-pdf_service = PDFService()
-file_utils = FileUtils()
-ai_service = AIService(api_key)
 
 class CategoryGUI(CTk):
     def __init__(self) -> None:
@@ -44,16 +39,15 @@ class CategoryGUI(CTk):
         self.suggest_categories_button = StandardButton(self.frame_bottom, text="Suggest Categories", state="disabled", command=self.suggest_categories)
         self.suggest_categories_button.pack(fill=BOTH, side=LEFT, padx=5)
 
-        self.resuggest_categories_button = StandardButton(self.frame_bottom, text="Resuggest Categories", state="disabled")
+        self.resuggest_categories_button = StandardButton(self.frame_bottom, text="Resuggest Categories", state="disabled", command=self.resuggest_categories)
         self.resuggest_categories_button.pack(fill=BOTH, side=RIGHT, padx=5)
 
         self.select_button = StandardButton(self.frame_bottom, text="Select Invoices Folder", command=self.ask_folder)
         self.select_button.pack(side=RIGHT, padx=5)
 
-        self.categories_button = StandardButton(self.frame_log, text="Show Categories", command=self.show_categories)
-        self.categories_button.pack(pady=10)
+        self.continue_button = StandardButton(self.frame_log, text="Continue", command=self.show_categories)
 
-        self.scrollable_frame = CTkScrollableFrame(self)
+        self.category_frame = StandardFrame(self)
 
     def ask_folder(self):
         folder_name = filedialog.askdirectory()
@@ -72,13 +66,21 @@ class CategoryGUI(CTk):
         thread = threading.Thread(target=main.extract_invoices, args=(document_batches, self.frame_log, on_complete))
         thread.start()
 
+    def resuggest_categories(self):
+        # Destroy all the widgets in category frame
+        for widget in self.category_frame.winfo_children():
+            widget.destroy()
+
+        main.resuggest_categories(self.selected_categories)
+        self.show_categories()
+
     def show_categories_button(self):
-        self.categories_button.pack(pady=10)
+        self.continue_button.pack(pady=10)
 
     def show_categories(self):
         self.frame_log.clear()
         self.frame_log.forget()
-        self.scrollable_frame.pack(fill=BOTH, padx=10, pady=5, expand=True)
+        self.category_frame.pack(fill=BOTH, padx=10, pady=5, expand=True)
         categories = load_json(project_root, "categories")
 
         self.selected_categories = []
@@ -87,15 +89,14 @@ class CategoryGUI(CTk):
         for category, idx in categories.items():
             display_text = category
             category_button = StandardButton(
-                self.scrollable_frame,
+                self.category_frame,
                 text=display_text,
                 command=lambda c=category: self.category_clicked(c)
             )
             category_button.pack(pady=2, expand=False)
-            print(category_button.cget("fg_color"))
             self.category_buttons[category] = category_button
 
-        label = StandardLabel(self.scrollable_frame, text="Select categories for resuggestion")
+        label = StandardLabel(self.category_frame, text="Select categories for resuggestion")
         label.pack(side=BOTTOM, pady=10)
             
     def category_clicked(self, category):
@@ -107,5 +108,9 @@ class CategoryGUI(CTk):
             self.selected_categories.append(category)
             button.configure(fg_color="red")
 
+        if len(self.selected_categories) != 0:
+            self.resuggest_categories_button.configure(state="normal")
+        else:
+            self.resuggest_categories_button.configure(state="disabled")
 
 
