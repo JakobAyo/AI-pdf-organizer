@@ -1,5 +1,6 @@
 import os
 from sys import implementation
+from time import sleep
 from dotenv import load_dotenv
 from gui.widgets import LogPanel, StandardButton, StandardLabel, StandardFrame
 from customtkinter import *
@@ -24,7 +25,6 @@ class CategoryGUI(CTk):
         self.title("AI Invoice Organizer")
         self.geometry("900x600")
 
-
         self.frame_top = StandardFrame(self, width=50, height=20)
         self.frame_top.pack(fill=BOTH, padx=10, pady=5, side=TOP)
 
@@ -46,6 +46,8 @@ class CategoryGUI(CTk):
         self.select_button = StandardButton(self.frame_bottom, text="Select Invoices Folder", command=self.ask_folder)
         self.select_button.pack(side=RIGHT, padx=5)
 
+        self.categories_button = StandardButton(self.frame_log, text="Show Categories")
+
     def ask_folder(self):
         folder_name = filedialog.askdirectory()
         self.config["folder_path"] = folder_name
@@ -56,7 +58,12 @@ class CategoryGUI(CTk):
         files = main.get_files()
         documents = main.extract_text(files)
         document_batches = main.split_batches(documents)
-        thread = threading.Thread(target=main.extract_invoices, args=(document_batches, self.frame_log))
+
+        def on_complete():
+            self.after(0, self.show_categories_button)
+
+        thread = threading.Thread(target=main.extract_invoices, args=(document_batches, self.frame_log, on_complete))
         thread.start()
 
-
+    def show_categories_button(self):
+        self.categories_button.pack(pady=10)
