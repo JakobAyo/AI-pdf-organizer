@@ -32,6 +32,7 @@ class InvoiceOrganizer:
         invoices = load_json(project_root, "invoices")
         file_name = invoices[int(id)]["filename"].split("/")[-1]
         invoices[int(id)]["filename"] = os.path.join(InvoiceOrganizer.PDF_FOLDER, category, file_name)
+        invoices[int(id)]["category"] = category
         save_json(project_root, invoices, "invoices")
 
 
