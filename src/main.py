@@ -41,7 +41,7 @@ def split_batches(documents):
     document_batches = chunk_list(documents, settings.BATCH_SIZE)
     return document_batches
 
-def extract_invoices(document_batches, log_frame):
+def extract_invoices(document_batches, log_frame, callback=None):
     all_invoices = []
 
     log_frame.write(print_utils.start())
@@ -63,6 +63,9 @@ def extract_invoices(document_batches, log_frame):
     # Save to json
     save_json(project_root, all_invoices, "invoices")
 
+    if callback:
+        callback()
+        
     return all_invoices
 
 def suggest_categories():
