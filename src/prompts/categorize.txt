@@ -5,28 +5,29 @@ Here are the invoice data:
 
 Output Format:
 
-[
+{{
     "Category 1": [ID, ID, ...],
     "Category 2": [ID, ID, ...],
     ...
-]
+}}
 
 Guidelines:
 
 - Each item should belong to exactly one category.
 - Categories should be broad enough to group similar items but distinct enough to avoid overlap.
-- Only return the The categories and the assigned IDs in Json format. (No Explaination needed)
+- Only return the The categories and the assigned IDs. (No Explaination needed)
 - return exactly {number_of_categories} Categories
 - Don't leave any category empty. Try to distribute the items as equal as possible
+- return a dictionary of categories and items
 
 Example Output (for illustration):
 
-[
+{{
     "Electronics & Technology": [0, 1, 13, 18, 29, 47],
     "Furniture": [2, 4, 6, 7, 19, 37],
     "Office Supplies": [5, 9, 10, 11, 12, 31],
     "Binders & Paper Products": [15, 20, 22, 26, 39],
     "Appliances & Equipment": [21, 28, 35, 42, 55]
-]
+}}
 
 Now, generate the categorized dictionary for the provided invoice data.

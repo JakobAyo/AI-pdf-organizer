@@ -15,10 +15,10 @@ Current Categories: {current_categories}
 
 Output Format:
 
-[
+{{
     "Category 1": [ID, ID, ...],
     "Category 2": [ID, ID, ...],
     ...
-]
+}}
 
 Now, suggest the {number_of_selected_categories} new categories and reassign the items accordingly.
