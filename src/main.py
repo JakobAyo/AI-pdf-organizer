@@ -63,8 +63,6 @@ def extract_invoices(document_batches, log_frame, callback=None):
     # Save to json
     save_json(load_config()["folder_path"], all_invoices, "invoices")
 
-    suggest_categories()
-
     if callback:
         callback()
         

@@ -68,6 +68,7 @@ class CategoryGUI(CTk):
         document_batches = main.split_batches(documents)
 
         def on_complete():
+            main.suggest_categories()
             self.after(0, self.show_categories_button)
 
         thread = threading.Thread(target=main.extract_invoices, args=(document_batches, self.frame_log, on_complete))
