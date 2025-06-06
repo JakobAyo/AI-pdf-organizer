@@ -167,7 +167,7 @@ class InvoiceApp(CTk):
         self.status_label.configure(text=f"Found {len(matches)} matching invoice(s)")
 
         for idx, invoice in enumerate(matches):
-            display_text = f"{invoice['Invoice Number']} - {invoice['Bill To']} - {invoice['Item']} - {invoice['Total']}"
+            display_text = f"{invoice['Invoice Number']} - {invoice['Item']} - {invoice['Total']}"
             result_btn = CTkButton(
                 self.results_frame,
                 text=display_text,
