@@ -1,0 +1,38 @@
+You are analyzing an invoice dataset containing various items. Based on the following list of items, suggest {number_of_categories} distinct categories that logically group these items.
+
+Here are the invoice data:
+{all_items}
+
+Output Format:
+
+{{
+    "Category 1": [ID, ID, ...],
+    "Category 2": [ID, ID, ...],
+    ...
+}}
+
+Strict Guidelines:
+
+1. Every single invoice must be categorized - DO NOT SKIP ANY ITEMS
+2. Each item must belong to exactly one category (no duplicates)
+3. Categories should be broad enough to group similar items but distinct enough to avoid overlap
+4. Return exactly {number_of_categories} categories
+5. All categories must contain at least one item
+6. The union of all category lists must include ALL invoice IDs from 0 to {max_id}
+7. If an item doesn't clearly fit, place it in the most appropriate category anyway
+
+Validation Rules:
+- Count of all categorized IDs must equal {total_items}
+- No gaps in ID ranges are permitted
+- No duplicate IDs across categories
+
+Example Output (for illustration):
+
+{{
+    "Electronics & Technology": [0, 1, 13, 18, 29, 47],
+    "Furniture": [2, 4, 6, 7, 19, 37],
+    "Office Supplies": [5, 9, 10, 11, 12, 31, 42, 55],  // Note all IDs are included
+    "Miscellaneous": [3, 8, 14, 15]  // No items left out
+}}
+
+Now, generate the categorized dictionary that includes EVERY invoice from the provided data.

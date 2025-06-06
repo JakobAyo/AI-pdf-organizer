@@ -11,11 +11,11 @@ def categories(categories):
 
 def start():
     size = 30
-    print(WHITE + '>'*size + f"{'Processing':^25}" + '<'*size + ENDC + "\n")
+    return '>'*size + f"{'Processing':^25}" + '<'*size + "\n"
 
 
 def end():
     size = 30
-    print(WHITE + '>'*size + f"{'Done!':^25}" + '<'*size + ENDC + "\n")
+    return '>'*size + f"{'Done!':^25}" + '<'*size + "\n"
 
     

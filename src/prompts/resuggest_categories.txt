@@ -1,0 +1,24 @@
+You are helping to resuggest category names for invoice items. The user has reviewed the initial category assignments but wants to replace the following categories: {selected_categories}.
+
+Guidelines:
+- Replace the categories {selected_categories} with {number_of_selected_categories} new logical categories that better group their current items.
+- Only return the The categories and the assigned IDs. (No Explaination needed)
+- Don't change the other categories only reassign the IDs.
+- return exactly {number_of_all_categories} categories.
+- Make sure all categories have IDs assigned to them.
+- Distribute the items to the categories as equal as possible
+
+Input Data:
+Items: {all_items}
+
+Current Categories: {current_categories}
+
+Output Format:
+
+{{
+    "Category 1": [ID, ID, ...],
+    "Category 2": [ID, ID, ...],
+    ...
+}}
+
+Now, suggest the {number_of_selected_categories} new categories and reassign the items accordingly.
