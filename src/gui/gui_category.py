@@ -53,6 +53,11 @@ class CategoryGUI(CTk):
 
     def ask_folder(self):
         folder_name = filedialog.askdirectory()
+
+        if os.path.isfile(os.path.join(folder_name, "invoices.json")):
+            self.destroy()
+            InvoiceApp().mainloop()
+
         self.config["folder_path"] = folder_name
         save_config(self.config)
         self.suggest_categories_button.configure(state="normal")
