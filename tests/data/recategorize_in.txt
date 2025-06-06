@@ -1,0 +1,45 @@
+```json
+[
+  {
+    "Electronics & Communication": [
+      "3",
+      "8",
+      "17",
+      "23"
+    ]
+  },
+  {
+    "Seating & Tables": [
+      "0",
+      "5",
+      "10",
+      "15"
+    ]
+  },
+  {
+    "Office Supplies": [
+      "2",
+      "6",
+      "9",
+      "11",
+      "16",
+      "19",
+      "21"
+    ]
+  },
+  {
+    "Shelving & Storage": [
+      "12",
+      "14",
+      "18",
+      "20"
+    ]
+  },
+  {
+    "Printing & Accessories": [
+      "7",
+      "22"
+    ]
+  }
+]
+```
