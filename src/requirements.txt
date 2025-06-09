@@ -37,3 +37,6 @@ uritemplate==4.1.1
 urllib3==2.4.0
 wcwidth==0.2.13
 xmod==1.8.1
+python-dotenv==1.1.0
+customtkinter==5.2.2
+pdfplumber==0.11.6
