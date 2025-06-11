@@ -8,6 +8,7 @@ Output Format:
 {{
     "Category 1": [ID, ID, ...],
     "Category 2": [ID, ID, ...],
+    "Category 3": [ID, ID, ...],
     ...
 }}
 
@@ -17,22 +18,20 @@ Strict Guidelines:
 2. Each item must belong to exactly one category (no duplicates)
 3. Categories should be broad enough to group similar items but distinct enough to avoid overlap
 4. Return exactly {number_of_categories} categories
-5. All categories must contain at least one item
-6. The union of all category lists must include ALL invoice IDs from 0 to {max_id}
-7. If an item doesn't clearly fit, place it in the most appropriate category anyway
+5. All categories must contain at least 3-5 IDs
 
 Validation Rules:
-- Count of all categorized IDs must equal {total_items}
-- No gaps in ID ranges are permitted
+- Count of all categorized IDs must equal {max_id}
 - No duplicate IDs across categories
+- Each ID is assigned to a category
 
-Example Output (for illustration):
+Example Output for 30 items (for illustration):
 
 {{
-    "Electronics & Technology": [0, 1, 13, 18, 29, 47],
-    "Furniture": [2, 4, 6, 7, 19, 37],
-    "Office Supplies": [5, 9, 10, 11, 12, 31, 42, 55],  // Note all IDs are included
-    "Miscellaneous": [3, 8, 14, 15]  // No items left out
+    "Electronics & Technology": [22, 1, 10, 28, 17, 6, 29, 11],
+    "Furniture": [7, 15, 0, 23, 12, 27, 21],
+    "Office Supplies": [2, 20, 4, 24, 13, 16, 5, 9, 18],  // Note all IDs are included
+    "Miscellaneous": [8, 3, 26, 14, 19, 30, 25]  // No items left out
 }}
 
 Now, generate the categorized dictionary that includes EVERY invoice from the provided data.

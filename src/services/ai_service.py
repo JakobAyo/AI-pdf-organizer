@@ -51,6 +51,7 @@ class AIService:
         prompt = prompt_template.format(
             all_items=json.dumps(self.all_items),
             number_of_categories=number_of_categories,
+            max_id=len(self.all_items)
         )
 
         try:
