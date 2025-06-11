@@ -6,7 +6,11 @@ Guidelines:
 - Don't change the other categories only reassign the IDs.
 - return exactly {number_of_all_categories} categories.
 - Make sure all categories have IDs assigned to them.
-- Distribute the items to the categories as equal as possible
+- All categories must contain at least 3-5 IDs
+
+Validation Rules:
+- No duplicate IDs across categories
+- Each ID is assigned to a category
 
 Input Data:
 Items: {all_items}
@@ -19,6 +23,15 @@ Output Format:
     "Category 1": [ID, ID, ...],
     "Category 2": [ID, ID, ...],
     ...
+}}
+
+Example Output for 30 items (for illustration):
+
+{{
+    "Electronics & Technology": [22, 1, 10, 28, 17, 6, 29, 11],
+    "Furniture": [7, 15, 0, 23, 12, 27, 21],
+    "Office Supplies": [2, 20, 4, 24, 13, 16, 5, 9, 18],  // Note all IDs are included
+    "Miscellaneous": [8, 3, 26, 14, 19, 30, 25]  // No items left out
 }}
 
 Now, suggest the {number_of_selected_categories} new categories and reassign the items accordingly.
