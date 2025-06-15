@@ -64,13 +64,13 @@ Follow any on-screen instructions.
 ---
 # How to use the App
 ### 1. Select Invoices Folder
-![alt text](image.png)
+![Image](https://github.com/user-attachments/assets/c1bc8a9a-8d04-4489-adab-b6b837571607)
 First click on the ```Select Invoices Folder``` Button
 
 Browse and select the folder containing your PDF invoices
 
 ### 2. Generate Category Suggestions
-![alt text](image-1.png)
+![Image](https://github.com/user-attachments/assets/63bc0588-02f9-418f-b75a-de8b72d07ef1)
 Click on the ```Suggest Categories``` Button
 
 The App will:
@@ -82,7 +82,7 @@ When complete, click ```Continue``` to proceed
 
 ### 3. Review and Refine Categories
 You'll see the AI-generated categories:
-![alt text](image-2.png)
+![Image](https://github.com/user-attachments/assets/825c8736-85a6-45aa-a53c-7befe296870f)
 
 To improve results:
 1. Select any unsatisfactory categories
@@ -96,7 +96,7 @@ Click ```Organize Invoices``` to:
 
 ### 5. Use the Lookup Table
 The system will open an advanced search interface:
-![alt text](image-3.png)
+![Image](https://github.com/user-attachments/assets/3a61207b-0edc-46a6-b4a1-1bbb9532b62e)
 
 **Features include**:
 - Multiple filter options
